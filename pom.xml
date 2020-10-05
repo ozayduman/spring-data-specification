@@ -75,6 +75,13 @@
             <artifactId>mapstruct</artifactId>
             <version>${org.mapstruct.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>tr.gov.tubitak.bilgem.yte.infra</groupId>
+            <artifactId>yte-data-jpa</artifactId>
+            <version>0.1.5-RELEASE</version>
+        </dependency>
+
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>

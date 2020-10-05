@@ -1,5 +1,7 @@
 package com.ozayduman.customer.repository;
 
+import com.ozayduman.customer.entity.Customer;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,10 +12,15 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Optional;
+
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
 @ComponentScan(basePackages = {"com.ozayduman.customer"})
 class CustomerRepositoryTest {
+
+    @Autowired
+    CustomerRepository customerRepository;
 
     @Autowired
     DataInitializer initializer;
@@ -34,7 +41,14 @@ class CustomerRepositoryTest {
      */
     @Test
     void shouldFindCustomer(){
+        final var customer = new Customer();
+        customer.setName("ozay");
+        customer.setSurname("duman");
+        customer.setEmail("ozay.duman@gmail.com");
+        customerRepository.save(customer);
 
+        final Optional<Customer> customerFromDB = customerRepository.findByEmail("ozay.duman@gmail.com");
+        Assertions.assertTrue(customerFromDB.isPresent());
     }
 
     /**
