@@ -86,7 +86,8 @@ class CustomerRepositoryTest {
 
     @Test
     void shouldFindCustomersByPhoneNumberViaManuelQuery() {
-
+        final List<Customer> customers = customerRepository.findCustomersByManuelQueryByPhoneNumber("5555");
+        assertTrue(!customers.isEmpty());
     }
 
     /**
