@@ -1,9 +1,9 @@
 package com.ozayduman.customer.entity;
 
-import lombok.*;
-import tr.gov.tubitak.bilgem.yte.infra.data.jpa.entity.AbstractEntity;
-import tr.gov.tubitak.bilgem.yte.infra.data.jpa.entity.AbstractVersionedEntity;
-import tr.gov.tubitak.bilgem.yte.infra.data.jpa.entity.AuditableEntity;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -14,10 +14,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class Customer extends AuditableEntity {
-    /*@Id
+public class Customer{
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;*/
+    private Long id;
     @NonNull
     private String name;
     @NonNull
