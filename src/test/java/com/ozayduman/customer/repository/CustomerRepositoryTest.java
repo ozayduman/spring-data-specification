@@ -12,7 +12,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
 import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
@@ -48,7 +52,7 @@ class CustomerRepositoryTest {
         customerRepository.save(customer);
 
         final Optional<Customer> customerFromDB = customerRepository.findByEmail("ozay.duman@gmail.com");
-        Assertions.assertTrue(customerFromDB.isPresent());
+        assertTrue(customerFromDB.isPresent());
     }
 
     /**
@@ -58,7 +62,8 @@ class CustomerRepositoryTest {
      */
     @Test
     void shouldFindCustomersByPhoneNumber(){
-
+        final var customersByPhonesNumber = customerRepository.findCustomersByPhonesNumber("5555");
+        assertFalse(customersByPhonesNumber.isEmpty());
     }
 
     /**
