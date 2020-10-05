@@ -1,5 +1,7 @@
 package com.ozayduman.customer.repository;
 
+import com.ozayduman.customer.entity.*;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,22 +10,35 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.ListJoin;
+import javax.persistence.criteria.Predicate;
+import java.time.LocalDate;
+import java.util.Optional;
+
+import static com.ozayduman.customer.entity.CustomerSpecifications.byEmailPhoneNumber;
+import static com.ozayduman.customer.entity.CustomerSpecifications.notBornToday;
+
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
 @ComponentScan(basePackages = {"com.ozayduman.customer"})
 class CustomerSpecificationRepositoryTest {
+    @Autowired
+    CustomerRepository customerRepository;
 
     @Autowired
     DataInitializer initializer;
 
     final Logger logger = LoggerFactory.getLogger(CustomerRepositoryTest.class);
 
-    @BeforeEach
+   /* @BeforeEach
     void setUp() {
         initializer.saveSampleData();
     }
-
+  */
     /**
      * Retrieve customers  that were born before today and combine this with phone & email use the following sample data
      *  phone :5555
@@ -33,6 +48,10 @@ class CustomerSpecificationRepositoryTest {
      */
     @Test
     void shouldExecuteSpecification() {
+
+        final Optional<Customer> customer = customerRepository.findOne(notBornToday().and(byEmailPhoneNumber("5555","od@gmail.com")));
+
+        Assertions.assertTrue(customer.isPresent());
 
     }
 }

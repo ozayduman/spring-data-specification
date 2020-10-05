@@ -119,6 +119,6 @@ class CustomerRepositoryTest {
 
         assertNotNull(customerDetail);
         logger.error("detail : {} ",customerDetail.getDetail());
-        Specification
+        //Specification
     }
 }
