@@ -4,8 +4,6 @@ import com.ozayduman.customer.entity.Customer;
 import com.ozayduman.customer.entity.PhoneType;
 import com.ozayduman.customer.entity.view.CustomerDetail;
 import com.ozayduman.customer.entity.view.NamesOnly;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -13,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
@@ -120,5 +119,6 @@ class CustomerRepositoryTest {
 
         assertNotNull(customerDetail);
         logger.error("detail : {} ",customerDetail.getDetail());
+        Specification
     }
 }
