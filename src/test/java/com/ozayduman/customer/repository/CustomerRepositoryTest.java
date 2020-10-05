@@ -2,6 +2,8 @@ package com.ozayduman.customer.repository;
 
 import com.ozayduman.customer.entity.Customer;
 import com.ozayduman.customer.entity.PhoneType;
+import com.ozayduman.customer.entity.view.CustomerDetail;
+import com.ozayduman.customer.entity.view.NamesOnly;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,8 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
@@ -32,10 +33,10 @@ class CustomerRepositoryTest {
 
     final Logger logger = LoggerFactory.getLogger(CustomerRepositoryTest.class);
 
-    @BeforeEach
+   /* @BeforeEach
     void setUp() {
        initializer.saveSampleData();
-    }
+    }*/
 
     /**
      * Save a customer with given
@@ -96,13 +97,14 @@ class CustomerRepositoryTest {
 
     /**
      * Retrieve customers' only name and surnames for given values
-     *  email: od@gmail.com
+     *  email: od@gmail.com NamesOnly
      *  Then log it
      * hint: use view package
      */
     @Test
     void shouldFindByEmailReturnOnlyNames() {
-
+        final Optional<NamesOnly> customerByEmail = customerRepository.findCustomerByEmail("od@gmail.com");
+        assertTrue(customerByEmail.isPresent());
     }
 
     /**
@@ -114,6 +116,9 @@ class CustomerRepositoryTest {
 
     @Test
     void shouldFindByEmailnWithDifferentViews() {
+        final CustomerDetail customerDetail = customerRepository.queryByEmail("od@gmail.com", CustomerDetail.class);
 
+        assertNotNull(customerDetail);
+        logger.error("detail : {} ",customerDetail.getDetail());
     }
 }
