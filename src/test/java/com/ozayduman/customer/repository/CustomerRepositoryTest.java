@@ -1,6 +1,7 @@
 package com.ozayduman.customer.repository;
 
 import com.ozayduman.customer.entity.Customer;
+import com.ozayduman.customer.entity.PhoneType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -73,7 +74,8 @@ class CustomerRepositoryTest {
      */
     @Test
     void shouldFindCustomersByPhoneType(){
-
+        final var customersByPhonesPhoneType = customerRepository.findCustomersByPhonesPhoneType(PhoneType.BUSINESS);
+        assertTrue(!customersByPhonesPhoneType.isEmpty());
     }
 
     /**
