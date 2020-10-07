@@ -1,5 +1,5 @@
 This project shows how to use specification queries in spring data jpa.
-Simple usage is shown in  _`CustomerSpecificationRepositoryTest.java`_
+There are sample basic usages shown in  _`CustomerSpecificationRepositoryTest.java`_
 
 Sample Specification Usage:
 ```
