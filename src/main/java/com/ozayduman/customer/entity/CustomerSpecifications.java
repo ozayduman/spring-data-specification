@@ -19,15 +19,19 @@ public class CustomerSpecifications {
       };
     }
 
-    public Specification<Customer> byEmailPhoneNumber(String number, String email) {
+    public Specification<Customer> byEmail( String email) {
+        return (root, criteriaQuery, criteriaBuilder) ->
+                    criteriaBuilder.equal(root.get(Customer_.email), email);
+    }
+
+    public Specification<Customer> byPhoneNumber(String number) {
         return (root, criteriaQuery, criteriaBuilder) -> {
             final Join<Customer, Phone> phonesJoin = root.join(Customer_.phones, JoinType.INNER);
-            Predicate and = criteriaBuilder.and(
-                    criteriaBuilder.equal(phonesJoin.get(Phone_.number), number),
-                    criteriaBuilder.equal(root.get(Customer_.email), email)
-            );
-            return and;
+            return criteriaBuilder.equal(phonesJoin.get(Phone_.number), number);
         };
     }
 
+    public Specification<Customer> byEmailAndPhoneNumber(String number, String email) {
+        return byEmail(email).and(byPhoneNumber(number));
+    }
 }

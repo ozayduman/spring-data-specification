@@ -19,8 +19,7 @@ import javax.persistence.criteria.Predicate;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import static com.ozayduman.customer.entity.CustomerSpecifications.byEmailPhoneNumber;
-import static com.ozayduman.customer.entity.CustomerSpecifications.notBornToday;
+import static com.ozayduman.customer.entity.CustomerSpecifications.*;
 
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
@@ -39,19 +38,31 @@ class CustomerSpecificationRepositoryTest {
         initializer.saveSampleData();
     }
   */
+
     /**
      * Retrieve customers  that were born before today and combine this with phone & email use the following sample data
-     *  phone :5555
-     *  email: od@gmail.com
-     *  Then log it
+     * phone :5555
+     * email: od@gmail.com
+     * Then log it
      * hint: combine specifications under a utility class
      */
     @Test
     void shouldExecuteSpecification() {
-
-        final Optional<Customer> customer = customerRepository.findOne(notBornToday().and(byEmailPhoneNumber("5555","od@gmail.com")));
+        final Optional<Customer> customer = customerRepository.findOne(notBornToday()
+                .and(byEmail("od@gmail.com"))
+                .and(byPhoneNumber("5555"))
+        );
 
         Assertions.assertTrue(customer.isPresent());
+    }
 
+    @Test
+    void shouldExecuteSpecificationWithWhenClause() {
+        final Optional<Customer> customer = customerRepository.findOne(Specification.where(notBornToday()
+                .and(byEmail("od@gmail.com"))
+                .and(byPhoneNumber("5555"))
+        ));
+
+        Assertions.assertTrue(customer.isPresent());
     }
 }
