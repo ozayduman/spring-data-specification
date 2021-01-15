@@ -23,7 +23,7 @@ Sample Specification:
     }
 ```
 
-# SPECIFICATION-BUILDER SAMPLE
+### SPECIFICATION-BUILDER SAMPLE
 This section shows how to use [Specification Builder](https://github.com/ozayduman/spring-data-specification-builder)
  library to write type-safe (client-oriented dynamic) queries for search screens in spring data jpa.
 The sample usage is shown in  _`CustomerController.java`_
