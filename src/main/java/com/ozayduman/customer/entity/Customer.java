@@ -25,7 +25,7 @@ public class Customer{
     @NonNull
     private String email;
     @NonNull
-    private LocalDate birdDate;
+    private LocalDate birthDate;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Phone> phones = new ArrayList<>();
@@ -41,7 +41,7 @@ public class Customer{
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
-                ", birtDate=" + birdDate +
+                ", birtDate=" + birthDate +
                 '}';
     }
 
