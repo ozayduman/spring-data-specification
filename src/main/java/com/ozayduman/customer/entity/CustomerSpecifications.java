@@ -15,7 +15,7 @@ public class CustomerSpecifications {
 
    public Specification<Customer> notBornToday() {
       return (root, criteriaQuery, criteriaBuilder) -> {
-          return criteriaBuilder.lessThan(root.get(Customer_.birdDate), LocalDate.now());
+          return criteriaBuilder.lessThan(root.get(Customer_.birthDate), LocalDate.now());
       };
     }
 

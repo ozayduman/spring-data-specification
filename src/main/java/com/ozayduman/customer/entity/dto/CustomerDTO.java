@@ -10,8 +10,9 @@ import java.time.LocalDate;
 @Data
 public class CustomerDTO {
     private String name;
-    private String surname;
-    private LocalDate birdDate;
+    private String lastName;
+    private LocalDate birthDate;
+    private String email;
 }
 /*
 @Data
